@@ -1,0 +1,40 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/spring_auth
+    username: root
+    password: 1346
+
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+      dialect: org.hibernate.dialect.MySQL8InnoDBDialect
+    defer-datasource-initialization: true
+    sql:
+      init:
+        mode: always
+        encoding: UTF-8
+#  data:
+#    redis:
+#      host: localhost
+#      port: 6379
+
+logging:
+  level:
+    org.hibernate.SQL: debug
+
+#cloud:
+#  aws:
+#    s3:
+#      bucket:
+#        name: ysp-delivery
+#        url: https://ysp-delivery.s3.ap-northeast-2.amazonaws.com/
+#    credentials:
+#      accessKey: AKIASCK3JFFOLBY6B5V6
+#      secretKey: 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
+#    region: ap-northeast-2
