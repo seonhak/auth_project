@@ -1,4 +1,4 @@
-package com.seonhak.auth_project.domain.config;
+package com.seonhak.auth_project.domain.security.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,5 +1,6 @@
 package com.seonhak.auth_project.domain.user.controller;
 
+import com.seonhak.auth_project.domain.user.dto.LoginRequest;
 import com.seonhak.auth_project.domain.user.dto.SignUpRequest;
 import com.seonhak.auth_project.domain.user.service.UserServiceImpl;
 import jakarta.validation.Valid;
@@ -32,4 +33,5 @@ public class UserController {
         }
         return ResponseEntity.ok().body(userServiceImpl.signUp(req).getBody());
     }
+
 }

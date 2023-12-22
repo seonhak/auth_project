@@ -9,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
@@ -17,14 +19,18 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public ResponseEntity<Object> signUp(SignUpRequest req) {
-        if (userRepository.findByUsername(req.getUsername()).isPresent()) {
-            return ResponseEntity.badRequest().body("이미 가입된 아이디입니다.");
-        }
         String username = req.getUsername();
         String password = passwordEncoder.encode(req.getPassword());
+
+        // 회원 중복 확인
+        Optional<User> checkUsername = userRepository.findByUsername(username);
+        if (checkUsername.isPresent()) {
+            throw new IllegalArgumentException("중복된 사용자가 존재합니다.");
+        }
+
+        // 사용자 등록
         User user = new User(username, password);
         userRepository.save(user);
-
         SignUpResponse res = new SignUpResponse(user);
         return ResponseEntity.ok().body(res.getUsername() + "님이 회원가입에 성공했습니다!");
     }
